@@ -21,12 +21,18 @@ return array (
 				'dir' => array (
 						'module' => dirname ( __DIR__ ) . '/index/module',
 						'model' => dirname ( __DIR__ ) . '/index/model',
-						'template' => dirname ( __DIR__ ) . '/index/template',
+						'method' => dirname ( __DIR__ ) . '/index/method' 
 				),
 				'default' => array (
 						'module' => 'index',
-						'action' => 'home',
-						'layout' => 'blank',
+						'action' => 'home' 
+				),
+				'html' => array (
+						'template' => dirname ( __DIR__ ) . '/index/template',
+						'cache' => dirname ( __DIR__ ) . '/index/cache',
+						'caching' => 0,
+						'living' => 0,
+						
 				) 
 		) 
 );

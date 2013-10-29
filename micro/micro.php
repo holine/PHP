@@ -29,7 +29,7 @@ class micro extends Single {
 		}
 		define ( 'MODULE', $this->cfg ['micro'] ['module'] );
 		define ( 'ACTION', $this->cfg ['micro'] ['action'] );
-		set_include_path ( get_include_path () . PATH_SEPARATOR . $this->cfg ['micro'] ['dir'] ['module'] . PATH_SEPARATOR . $this->cfg ['micro'] ['dir'] ['model'] . PATH_SEPARATOR . $this->cfg ['micro'] ['dir'] ['template'] );
+		set_include_path ( get_include_path () . PATH_SEPARATOR . $this->cfg ['micro'] ['dir'] ['module'] . PATH_SEPARATOR . $this->cfg ['micro'] ['dir'] ['model'] . PATH_SEPARATOR . $this->cfg ['micro'] ['dir'] ['method']);
 		
 		if (empty ( $_REQUEST [MODULE] )) {
 			$_REQUEST [MODULE] = $this->cfg ['micro'] ['default'] ['module'];
@@ -41,12 +41,10 @@ class micro extends Single {
 	public function route() {
 		$m = $_REQUEST [MODULE] . 'Module';
 		$m = new $m ( $this->cfg );
-		
 		foreach ( explode ( ',', $m->models ) as $model ) {
 			$modelName = "{$model}Model";
 			$m->$model = new $modelName ();
 		}
-		
 		$m->$_REQUEST [ACTION] ();
 	}
 }
