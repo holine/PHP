@@ -12,7 +12,7 @@ class Html {
 		$this->var [$key] = $value;
 	}
 	function fetch($view = NULL, $layout = NULL, $cacheid = NULL) {
-		$view = is_null ( $view ) ? $_REQUEST [ACTION] : preg_replace ( '/\\|\//is', '', $view );
+		$view = is_null ( $view ) ? $_REQUEST [ACTION] : preg_replace ( '/\.|\\|\//is', '', $view );
 		extract ( $this->var );
 		ob_start ();
 		include $this->cfg ['micro'] ['html'] ['template'] . DIRECTORY_SEPARATOR . $_REQUEST [MODULE] . DIRECTORY_SEPARATOR . $_REQUEST [ACTION] . '.php';

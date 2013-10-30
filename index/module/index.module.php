@@ -1,5 +1,5 @@
 <?php
-class IndexModule extends Index {
+class IndexModule extends Module{
 	public $models = 'login,register';
 	public $vars = 1;
 	function home(){

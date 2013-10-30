@@ -1,5 +1,5 @@
 <?php
-abstract class Single {
+abstract class SingleAbstract {
 	private static $instance;
 	protected function __construct() {
 	}

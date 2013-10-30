@@ -9,11 +9,13 @@ spl_autoload_register ( function ($class) {
 		include strtolower ( substr ( $class, 0, - 6 ) ) . '.module.php';
 	} else if (strrpos ( $class, 'Model', - 1 )) {
 		include strtolower ( substr ( $class, 0, - 5 ) ) . '.model.php';
+	} else if (strrpos ( $class, 'Abstract', - 1 )) {
+		include strtolower ( substr ( $class, 0, -8 ) ) . '.abstract.php';
 	} else {
 		include strtolower ( $class ) . '.class.php';
 	}
 } );
-class micro extends Single {
+class micro extends SingleAbstract {
 	private $cfg;
 	protected function __construct($path = '', $cfg = array()) {
 		$this->cfg = ! empty ( $path ) && is_file ( $path ) ? array_merge_recursive ( include $path, $cfg ) : $cfg;
@@ -41,6 +43,8 @@ class micro extends Single {
 	public function route() {
 		$m = $_REQUEST [MODULE] . 'Module';
 		$m = new $m ( $this->cfg );
+		$m->cfg = $this->cfg;
+		$m->html = new html($this->cfg);
 		foreach ( explode ( ',', $m->models ) as $model ) {
 			$modelName = "{$model}Model";
 			$m->$model = new $modelName ();
